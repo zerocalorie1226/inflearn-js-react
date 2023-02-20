@@ -11,11 +11,20 @@ function taskB(a, cb) {
   }, 1000);
 }
 
-taskA(3, 4, (res) => {
-  console.log(res);
+function taskC(a, cb) {
+  setTimeout(() => {
+    const res = a * -1;
+    cb(res);
+  }, 2000);
+}
+taskA(4, 5, (a_res) => {
+  console.log(a_res);
+  taskB(a_res, (b_res) => {
+    console.log(b_res);
+    taskC(b_res, (c_res) => {
+      console.log(c_res);
+    });
+  });
 });
 
-taskB(7, (res) => {
-  console.log(res);
-});
 console.log("코드 끝");
